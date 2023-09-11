@@ -1,11 +1,10 @@
-import './App.css'
+
 
 function App() {
 
 
   return (
-    <div></div>
-
+<main>test</main>
   )
     
 }
