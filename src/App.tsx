@@ -34,4 +34,6 @@ function App() {
 }
 ///Making api calls in AirCode ide
 
+//All prices are fetched, now caching prices
+
 export default App
