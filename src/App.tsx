@@ -37,5 +37,6 @@ function App() {
 //All prices are fetched, now caching prices
 
 //Values are now cached and will constantly update due to Chrome Jump.
+//Working on porting from aircode to VSCode
 
 export default App
