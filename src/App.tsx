@@ -5,6 +5,7 @@ import axios from "axios";
 function App() {
   const [amount, setAmount] = useState('100');
   const [cachedResults, setCachedResults] = useState([]);
+  const [loading,setLoading] = useState(true);
   
   useEffect(() =>{
     axios.get('https://d9i497wm8d.us.aircode.run/cachedValues')
@@ -28,11 +29,17 @@ function App() {
 
 </div>
 <div className="mt-6"> 
-  <ResultRow />
-  <ResultRow />
-  <ResultRow />
-  <ResultRow />
+{loading &&(
+  <>
+  <ResultRow  loading={true}/>
+  <ResultRow  loading={true}/>
+  <ResultRow  loading={true}/>
+  <ResultRow  loading={true}/>
+  </>
+  )}
+
 </div>
+
   
 
 
