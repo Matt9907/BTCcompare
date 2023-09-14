@@ -11,7 +11,11 @@ type ResultRowProps ={
 
 const logosUrls ={
     paybis: {source:paybisLogo, invert:true},
-    
+    guardian: {source:'https://guardarian.com/main-logo.svg'},
+    moonpay: {source:'https://www.moonpay.com/assets/logo-full-white.svg'},
+    transak: {source:'https://assets.transak.com/images/website/transak-logo-white.svg'},
+
+
 }
 
 export default function ResultRow({loading,providerName,btc}:ResultRowProps){
