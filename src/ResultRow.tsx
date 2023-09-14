@@ -28,16 +28,16 @@ export default function ResultRow({loading,providerName,btc}:ResultRowProps){
         <div className="relative border min-h-[64px] border-white/10 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 p-4 my-2 overflow-hidden "> 
         <div className="flex gap-4">
             {providerName && (
-                <div>
+                <div className='grow items-center flex'>
                     <img 
                     src={logos[providerName].source} 
-                    className={"h-6 invert" + (logos[providerName]?.invert ? 'invert' : '')} 
+                    className={"h-8 invert" + (logos[providerName]?.invert ? 'invert' : '')} 
                     alt ="" />
                 </div>
 
             )}
            
-            <div className="grow">{providerName || ''}</div>
+            
             
             {btc && (
             <div className="flex gap-2">
