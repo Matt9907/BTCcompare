@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import AmountInput from "./AmountInput";
 import ResultRow from "./ResultRow";
 import axios from "axios";
-import {result, sortBy} from 'lodash';
+import {sortBy} from 'lodash';
 import useDebouncedEffect from 'use-debounced-effect';
 import Skeleton from "./Skeleton";
 
@@ -48,12 +48,15 @@ function App() {
        },300,[amount]);
 
    const sortedCache:CachedResult[] = sortBy(cachedResults, 'btc').reverse();
-   const sortedResults:CachedResult[] = sortBy(Object.keys(offerResults).map(provider =>({
-    provider,
-    btc: offerResults[provider]
-   })),'btc').reverse();
+  //  const sortedResults:CachedResult[] = sortBy(Object.keys(offerResults).map(provider =>({
+  //   provider,
+  //   btc:offerResults[provider]
+  //  })),'btc').reverse();
+   
    
    const showCached = amount === defaultAmount;
+  
+ 
 
 
 
@@ -73,14 +76,9 @@ function App() {
 </div>
 <div className="mt-6"> 
 {loading &&(
-  <>
-  <ResultRow  loading={true}/>
-  <ResultRow  loading={true}/>
-  <ResultRow  loading={true}/>
-  <ResultRow  loading={true}/>
-  </>
+  <Skeleton />
   )}
-  {!loading && sortedCache.map((result:CachedResult) =>(
+  {!loading  && showCached && sortedCache.map(result =>(
     <ResultRow 
     key={result.provider}
     providerName={result.provider}
@@ -90,14 +88,7 @@ function App() {
 
   
   ))}
-  {!loading && !showCached && sortedResults.map(result =>(
-    <ResultRow 
-    key={result.provider}
-    providerName={result.provider}
-    btc= {result.btc}
-     />
-
-  ))}
+  
 
 </div>
 
