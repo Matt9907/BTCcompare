@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import AmountInput from "./AmountInput";
 import ResultRow from "./ResultRow";
 import axios from "axios";
-import {sortBy} from 'lodash';
+import {result, sortBy} from 'lodash';
 import useDebouncedEffect from 'use-debounced-effect';
 import Skeleton from "./Skeleton";
 
@@ -35,6 +35,7 @@ function App() {
       return;
     }
          if(amount !== prevAmount ){
+          setLoading(true);
           axios.get(`https://d9i497wm8d.us.aircode.run/offers?amount=${amount}`)
           .then(res =>{
             setLoading(false);
@@ -54,7 +55,7 @@ function App() {
    
    const showCached = amount === defaultAmount;
 
-   const rows = showCached ? sortedCache : sortedResults;
+
 
 
   return (
@@ -88,6 +89,14 @@ function App() {
     
 
   
+  ))}
+  {!loading && !showCached && sortedResults.map(result =>(
+    <ResultRow 
+    key={result.provider}
+    providerName={result.provider}
+    btc= {result.btc}
+     />
+
   ))}
 
 </div>
