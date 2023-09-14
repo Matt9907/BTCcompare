@@ -2,9 +2,16 @@ import {useEffect, useState} from "react";
 import AmountInput from "./AmountInput";
 import ResultRow from "./ResultRow";
 import axios from "axios";
+
+type CachedResult ={
+  provider: string;
+  btc: string;
+};
+
+
 function App() {
   const [amount, setAmount] = useState('100');
-  const [cachedResults, setCachedResults] = useState([]);
+  const [cachedResults, setCachedResults] = useState<CachedResult[]>([]);
   const [loading,setLoading] = useState(true);
   
   useEffect(() =>{
@@ -38,6 +45,11 @@ function App() {
   <ResultRow  loading={true}/>
   </>
   )}
+  {!loading && cachedResults.map(result =>(
+    <ResultRow providerName={result.provider} />
+
+  
+  ))}
 
 </div>
 
