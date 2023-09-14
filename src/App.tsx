@@ -46,7 +46,11 @@ function App() {
   </>
   )}
   {!loading && cachedResults.map(result =>(
-    <ResultRow providerName={result.provider} />
+    <ResultRow 
+    providerName={result.provider}
+    btc= {result.btc}
+     />
+    
 
   
   ))}

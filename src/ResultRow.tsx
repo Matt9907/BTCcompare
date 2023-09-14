@@ -2,7 +2,7 @@ type ResultRowProps ={
     loading?: boolean;
     providerName?: string;
     btc?:string;
-}
+};
 
 export default function ResultRow({loading,providerName,btc}:ResultRowProps){
     return(
@@ -14,11 +14,12 @@ export default function ResultRow({loading,providerName,btc}:ResultRowProps){
             )}
            
             <div className="grow">{providerName || ''}</div>
+            
             {btc && (
-
-           
             <div className="flex gap-2">
-            <span className="text-xl text-purple-200/80">0.000</span>
+            <span className="text-xl text-purple-200/80">
+                {new Intl.NumberFormat('en-US', {minimumFractionDigits:8}).format(parseFloat(btc))}
+                </span>
             <span className="text-xl text-purple-300/50">BTC</span>
             </div>
              )}
