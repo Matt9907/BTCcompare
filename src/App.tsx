@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import AmountInput from "./AmountInput";
 import ResultRow from "./ResultRow";
 import axios from "axios";
+import {sortBy} from 'lodash';
 
 type CachedResult ={
   provider: string;
@@ -21,6 +22,8 @@ function App() {
       setLoading(false);
     });
   },[]);
+
+   const sortedCache = sortBy(cachedResults, 'btc').reverse();
 
 
   return (
@@ -45,7 +48,7 @@ function App() {
   <ResultRow  loading={true}/>
   </>
   )}
-  {!loading && cachedResults.map(result =>(
+  {!loading && sortedCache.map((result:CachedResult) =>(
     <ResultRow 
     providerName={result.provider}
     btc= {result.btc}

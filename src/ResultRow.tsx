@@ -1,15 +1,30 @@
+import paybisLogo from './assets/paybis.webp';
+
+
+
+
 type ResultRowProps ={
     loading?: boolean;
     providerName?: string;
     btc?:string;
 };
 
+const logosUrls ={
+    paybis: {source:paybisLogo, invert:true},
+    
+}
+
 export default function ResultRow({loading,providerName,btc}:ResultRowProps){
     return(
         <div className="relative border min-h-[64px] border-white/10 rounded-lg bg-gradient-to-r from-purple-500/10 to-blue-500/10 p-4 my-2 overflow-hidden "> 
         <div className="flex gap-4">
             {providerName && (
-                <div>Logo</div>
+                <div>
+                    <img src={paybisLogo} className=" h-6 invert"  
+                    alt ="" />
+
+
+                </div>
 
             )}
            
