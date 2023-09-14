@@ -26,7 +26,7 @@ function App() {
 
   useDebouncedEffect(() =>{
     console.log('check for' + amount)
-  },[amount]);
+  },300,[amount]);
 
    const sortedCache = sortBy(cachedResults, 'btc').reverse();
 
