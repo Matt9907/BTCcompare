@@ -1,8 +1,17 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AmountInput from "./AmountInput";
 import ResultRow from "./ResultRow";
+import axios from "axios";
 function App() {
   const [amount, setAmount] = useState('100');
+  const [cachedResults, setCachedResults] = useState([]);
+  
+  useEffect(() =>{
+    axios.get('https://d9i497wm8d.us.aircode.run/cachedValues')
+    .then(res =>{
+      setCachedResults(res.data);
+    });
+  },[]);
 
 
   return (
@@ -12,7 +21,8 @@ function App() {
     </h1>
 
 <div className="flex justify-center mt-6">
-  <AmountInput value = {amount} 
+  <AmountInput 
+  value = {amount} 
   onChange={e=>setAmount(e.target.value)} 
   />
 
