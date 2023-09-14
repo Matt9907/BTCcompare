@@ -4,17 +4,22 @@ import ResultRow from "./ResultRow";
 import axios from "axios";
 import {sortBy} from 'lodash';
 import useDebouncedEffect from 'use-debounced-effect';
+import Skeleton from "./Skeleton";
 
 type CachedResult ={
   provider: string;
   btc: string;
 };
 
+type OfferResults ={[keys:string]:string};
+
+const defaultAmount = '100';
 
 function App() {
-  const [prevAmount, setPrevAmount] = useState('100');
-  const [amount, setAmount] = useState('100');
+  const [prevAmount, setPrevAmount] = useState(defaultAmount);
+  const [amount, setAmount] = useState(defaultAmount);
   const [cachedResults, setCachedResults] = useState<CachedResult[]>([]);
+  const [offerResults,setOfferResults] = useState<OfferResults>({});
   const [loading,setLoading] = useState(true);
   
   useEffect(() =>{
@@ -26,13 +31,30 @@ function App() {
   },[]);
 
   useDebouncedEffect(() =>{
+    if (amount === defaultAmount){
+      return;
+    }
          if(amount !== prevAmount ){
-          console.log('check for' + amount);
+          axios.get(`https://d9i497wm8d.us.aircode.run/offers?amount=${amount}`)
+          .then(res =>{
+            setLoading(false);
+            setOfferResults(res.data);
+            setPrevAmount(amount);
+
+          })
          }
     
        },300,[amount]);
 
-   const sortedCache = sortBy(cachedResults, 'btc').reverse();
+   const sortedCache:CachedResult[] = sortBy(cachedResults, 'btc').reverse();
+   const sortedResults:CachedResult[] = sortBy(Object.keys(offerResults).map(provider =>({
+    provider,
+    btc: offerResults[provider]
+   })),'btc').reverse();
+   
+   const showCached = amount === defaultAmount;
+
+   const rows = showCached ? sortedCache : sortedResults;
 
 
   return (
@@ -70,7 +92,7 @@ function App() {
 
 </div>
 
-  
+
 
 
 
