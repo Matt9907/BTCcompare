@@ -3,6 +3,7 @@ import AmountInput from "./AmountInput";
 import ResultRow from "./ResultRow";
 import axios from "axios";
 import {sortBy} from 'lodash';
+import useDebouncedEffect from 'use-debounced-effect';
 
 type CachedResult ={
   provider: string;
@@ -22,6 +23,10 @@ function App() {
       setLoading(false);
     });
   },[]);
+
+  useDebouncedEffect(() =>{
+    console.log('check for' + amount)
+  },[amount]);
 
    const sortedCache = sortBy(cachedResults, 'btc').reverse();
 
@@ -50,6 +55,7 @@ function App() {
   )}
   {!loading && sortedCache.map((result:CachedResult) =>(
     <ResultRow 
+    key={result.provider}
     providerName={result.provider}
     btc= {result.btc}
      />
