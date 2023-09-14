@@ -9,7 +9,12 @@ type ResultRowProps ={
     btc?:string;
 };
 
-const logosUrls ={
+type Logo ={
+    source:string, 
+    invert?:boolean
+};
+
+const logos: {[keys:string]:Logo} ={
     paybis: {source:paybisLogo, invert:true},
     guardian: {source:'https://guardarian.com/main-logo.svg'},
     moonpay: {source:'https://www.moonpay.com/assets/logo-full-white.svg'},
@@ -24,10 +29,10 @@ export default function ResultRow({loading,providerName,btc}:ResultRowProps){
         <div className="flex gap-4">
             {providerName && (
                 <div>
-                    <img src={paybisLogo} className=" h-6 invert"  
+                    <img 
+                    src={logos[providerName].source} 
+                    className={"h-6 invert" + (logos[providerName]?.invert ? 'invert' : '')} 
                     alt ="" />
-
-
                 </div>
 
             )}
