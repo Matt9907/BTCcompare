@@ -11,6 +11,7 @@ function App() {
     axios.get('https://d9i497wm8d.us.aircode.run/cachedValues')
     .then(res =>{
       setCachedResults(res.data);
+      setLoading(false);
     });
   },[]);
 
@@ -49,11 +50,6 @@ function App() {
   )
     
 }
-///Making api calls in AirCode ide
 
-//All prices are fetched, now caching prices
-
-//Values are now cached and will constantly update due to Chrome Jump.
-//Working on porting from aircode to VSCode
 
 export default App
