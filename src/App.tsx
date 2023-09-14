@@ -12,6 +12,7 @@ type CachedResult ={
 
 
 function App() {
+  const [prevAmount, setPrevAmount] = useState('100');
   const [amount, setAmount] = useState('100');
   const [cachedResults, setCachedResults] = useState<CachedResult[]>([]);
   const [loading,setLoading] = useState(true);
@@ -25,8 +26,11 @@ function App() {
   },[]);
 
   useDebouncedEffect(() =>{
-    console.log('check for' + amount)
-  },300,[amount]);
+         if(amount !== prevAmount ){
+          console.log('check for' + amount);
+         }
+    
+       },300,[amount]);
 
    const sortedCache = sortBy(cachedResults, 'btc').reverse();
 
