@@ -48,13 +48,14 @@ function App() {
        },300,[amount]);
 
    const sortedCache:CachedResult[] = sortBy(cachedResults, 'btc').reverse();
-  //  const sortedResults:CachedResult[] = sortBy(Object.keys(offerResults).map(provider =>({
-  //   provider,
-  //   btc:offerResults[provider]
-  //  })),'btc').reverse();
+   const sortedResults:CachedResult[] = sortBy(Object.keys(offerResults).map(provider =>({
+    provider,
+    btc:offerResults[provider]
+   })),'btc').reverse();
    
    
    const showCached = amount === defaultAmount;
+   const rows = showCached ? sortedCache : sortedResults;
   
  
 
@@ -78,7 +79,7 @@ function App() {
 {loading &&(
   <Skeleton />
   )}
-  {!loading  && showCached && sortedCache.map(result =>(
+  {!loading  && rows.map(result =>(
     <ResultRow 
     key={result.provider}
     providerName={result.provider}

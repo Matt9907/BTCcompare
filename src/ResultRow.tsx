@@ -59,7 +59,7 @@ export default function ResultRow({loading,providerName,btc}:ResultRowProps){
              )}
         </div>
         {loading &&(
-            <div className= "inset-0 absolute bg-gradient-to-r from-transparent via-blue-900/50 to transparent skeleton-animation" />
+            <div className= "inset-0 absolute bg-gradient-to-r from-transparent via-blue-900/50 to transparent skeleton-animation border-t border-white/25" />
         )}
         </a>
     );
