@@ -8,7 +8,7 @@ placeholder = "Amount"
 className= "border-0 w-24 pl-4 bg-transparent text-2xl"
 value={props.value} 
 onChange={props.onChange} />
-<span className= "text-white/50 px-4"> USD</span>
+<span className= "text-white/50 px-4">USD</span>
 </div>
 
     );
